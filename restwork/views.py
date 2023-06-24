@@ -8,7 +8,7 @@ from .serializers import AdvocateSerializer
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from rest_framework.views import APIView
-from rest_framework import status
+from django.http import Http404
 
 # Create your views here.
 @api_view(['GET'])
@@ -36,28 +36,9 @@ def advocate_list(request):
         return Response(serializer.data)
     
 
-# @permission_classes([IsAuthenticatedOrReadOnly])
-# class AdvocateDetails(APIView):
-#     def get(self, request, username):
-#         try:
-#             advocate=Advocate.objects.get(username=username)
-#             serializer=AdvocateSerializer(advocate,many=False)
-#             return Response(serializer.data)
-#         except ObjectDoesNotExist:
-#             return Response({'error': 'Advocate username not found.'}, status=404)
-#     def put(self,request,username):
-#         advocate=Advocate.objects.get(username=username)
-#         advocate.bio=request.data['bio']
-#         advocate.save()
-#         serializer=AdvocateSerializer(advocate,many=False)
-#         return Response(serializer.data)
-#     def delete(self,request,username):
-#         advocate=Advocate.objects.get(username=username)
-#         advocate.delete()
-#         return Response('user was deleted')
 
-    
-        
+
+
 
 @api_view(['GET','PUT','DELETE'])
 @permission_classes([IsAuthenticatedOrReadOnly])
