@@ -49,7 +49,7 @@ class AdvocateDetails(APIView):
         return Response(serializer.data)
     def put(self,request,username):
         advocate=self.get_object(username)
-        advocate.username=request.data['username']
+        advocate.bio=request.data['username']
         advocate.bio=request.data['bio']
         advocate.save()
         serializer=AdvocateSerializer(advocate,many=False)
