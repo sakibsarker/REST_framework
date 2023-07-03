@@ -8,7 +8,10 @@ class Company(models.Model):
         return self.name
 class Advocate(models.Model):
     company=models.ForeignKey(Company,on_delete=models.CASCADE,null=True,blank=True)
-    username=models.CharField(max_length=10)
-    bio=models.TextField(max_length=1000)
+    name=models.CharField(max_length=500,null=True,blank=True)
+    profile_pic=models.CharField(max_length=500,null=True,blank=True)
+    username=models.CharField(max_length=500,null=True,blank=True)
+    bio=models.TextField(max_length=1000,null=True,blank=True)
+    twitter=models.URLField(null=True,blank=True)
     def __str__(self):
         return self.username

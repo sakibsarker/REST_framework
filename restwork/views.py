@@ -9,7 +9,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from rest_framework.views import APIView
 from django.http import Http404
-
+import requests
 # Create your views here.
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
