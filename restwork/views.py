@@ -10,10 +10,18 @@ from django.db.models import Q
 from rest_framework.views import APIView
 from django.http import Http404
 import requests
+from dotenv import load_dotenv
+load_dotenv()
+import os
+
+
+TWITTER_API_KEY=os.environ.get('TWITTER_API_KEY')
+
 # Create your views here.
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticatedOrReadOnly])
 def enpoint(request):
+    print(TWITTER_API_KEY )
     data=['advocates','advocates/:username']
     return Response(data)
 
@@ -44,6 +52,12 @@ class AdvocateDetails(APIView):
         except Advocate.DoesNotExist:
             raise Http404("Advocate doesn't exist.")
     def get(self, request, username):
+
+        # head={'Authorization': 'Bearer ' + TWITTER_API_KEY}
+        # url='https://api.twitter.com/2/users/by/username/{}'.format(username)
+        # test=requests.get(url,headers=head).json()
+        # print('Data form Twitter***',test)
+
         advocate=self.get_object(username)
         serializer=AdvocateSerializer(advocate,many=False)
         return Response(serializer.data)
